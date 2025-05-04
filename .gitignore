@@ -12,9 +12,6 @@ dist/
 
 # Log files
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Vite cache
 .vite/
@@ -33,10 +30,6 @@ coverage/
 # Editor directories and files
 .vscode/
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
 
 # MacOS
 .DS_Store
@@ -44,10 +37,3 @@ coverage/
 # Windows
 Thumbs.db
 desktop.ini
-
-# Linux/macOS
-*.swp
-*~
-
-# IDE-specific
-*.code-workspace

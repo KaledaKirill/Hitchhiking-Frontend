@@ -1,0 +1,53 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vite cache
+.vite/
+
+# Test coverage
+coverage/
+
+# Cache files
+*.cache
+.eslintcache
+
+# CI/CD
+.vercel/
+.netlify/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux/macOS
+*.swp
+*~
+
+# IDE-specific
+*.code-workspace

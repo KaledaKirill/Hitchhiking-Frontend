@@ -1,0 +1,134 @@
+.container {
+    padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Заголовок профиля с иконкой и информацией */
+  .profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    background-color: #fff; /* Белый фон для заголовка */
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  }
+  
+  .profileIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #00c4b4; /* Зеленоватый фон иконки, как на скриншоте */
+    padding: 0.2rem;
+    object-fit: cover; /* Убедимся, что изображение помещается */
+  }
+  
+  .profileHeader h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #030303; /* Темный текст */
+  }
+  
+  .profileHeader p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #666; /* Серый текст для email и телефона */
+  }
+  
+  /* Контейнер для секций поездок */
+  .tripsContainer {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+  
+  /* Секция поездок (водитель или пассажир) */
+  .tripsSection {
+    flex: 1;
+    background-color: #e0f2f1; /* Светло-зеленый фон, как на скриншоте */
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для выделения */
+  }
+  
+  .tripsSection h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #030303;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc; /* Линия под заголовком */
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Карточка поездки */
+  .tripCard {
+    border-bottom: 1px solid #ccc; /* Разделение между поездками */
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .tripCard p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #2e5e5e; /* Темно-бирюзовый текст, как на скриншоте */
+    line-height: 1.4;
+  }
+  
+  /* Кнопки управления поездкой */
+  .tripButtons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .modifyButton {
+    background-color: #000; /* Черный фон кнопки */
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .deleteButton {
+    background-color: #000; /* Черный фон кнопки */
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modifyButton:hover,
+  .deleteButton:hover {
+    background-color: #333; /* Темно-серый при наведении */
+  }
+  
+  /* Сообщения о пустых списках */
+  .tripsSection p:last-child {
+    color: #666;
+    font-style: italic;
+  }
+  
+  /* Состояния загрузки и ошибки */
+  .loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 2rem;
+  }
+  
+  .error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ff4d4f; /* Красный для ошибок */
+    margin-top: 2rem;
+  }

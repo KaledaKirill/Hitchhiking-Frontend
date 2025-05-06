@@ -1,0 +1,131 @@
+/* src/styles/Header.module.css */
+.nav {
+  background-color: #fff;
+  color: #030303;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Легкая тень для выделения */
+}
+
+.navContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.5rem 1rem; /* Добавляем отступы по бокам */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #030303;
+  transition: color 0.3s ease;
+}
+
+.logoLink img {
+  width: 30px;
+  height: 30px;
+  padding: 0 3px 5px 3px;
+  object-fit: contain; 
+}
+
+.logoLink span {
+  font-size: 20px; 
+  color: inherit; 
+  white-space: nowrap; 
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  /* Этот класс можно использовать для других иконок, если нужно */
+}
+
+.navLinksContainer {
+  margin-left: auto;
+  margin-right: 2rem; /* Сохраняем расстояние до иконки профиля */
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.link {
+  text-decoration: none;
+  color: #030303;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #00c4b4;
+}
+
+.profileContainer {
+  position: relative;
+}
+
+.profileIcon {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #00c4b4;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileIcon:hover {
+  background-color: #009e8f;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+  z-index: 1000;
+  margin-top: 0.5rem;
+}
+
+.dropdownItem {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #030303;
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
+}
+
+button.dropdownItem {
+  color: #ff4d4f;
+}
+
+button.dropdownItem:hover {
+  background-color: #ffebee;
+}

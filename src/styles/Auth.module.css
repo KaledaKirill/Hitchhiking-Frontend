@@ -1,0 +1,90 @@
+/* src/styles/Auth.module.css */
+.container {
+    padding: 1rem 0;
+    max-width: 400px;
+    margin: 100px auto auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    /* Убрано min-height: 100vh, чтобы избежать искусственного растяжения */
+  }
+  
+  .form {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 1rem 0;
+    max-height: 70vh; /* Ограничиваем высоту формы */
+    overflow-y: auto; /* Прокрутка внутри формы при переполнении */
+  }
+  
+  .formGroup {
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  
+  .formGroup label {
+    display: block;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 0.4rem;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #00c4b4;
+    box-shadow: 0 0 5px rgba(0, 196, 180, 0.3);
+  }
+  
+  .input.error {
+    border-color: #ff4d4f;
+    box-shadow: 0 0 5px rgba(255, 77, 79, 0.3);
+  }
+  
+  .button {
+    background-color: #00c4b4;
+    color: #fff;
+    border: none;
+    padding: 0.6rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #009e8f;
+  }
+  
+  .error {
+    color: #ff4d4f;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    max-height: 2rem;
+    overflow-y: hidden;
+  }
+  
+  .success {
+    color: #00c4b4;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    max-height: 2rem;
+    overflow-y: hidden;
+  }

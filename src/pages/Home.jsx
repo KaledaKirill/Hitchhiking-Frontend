@@ -1,12 +1,13 @@
-// src/pages/Home.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext'; // Импортируем AuthContext
 import { getAllRides } from '../api/api';
 import styles from '../styles/Home.module.css';
 import arrowIcon from '../assets/arrow.png';
 import carIcon from '../assets/car.png';
 
 function Home() {
+  const { user } = useContext(AuthContext); // Получаем информацию о пользователе
   const [rides, setRides] = useState([]);
   const navigate = useNavigate();
 
@@ -40,7 +41,13 @@ function Home() {
   };
 
   const handleViewDetails = (rideId) => {
-    navigate(`/ride/${rideId}`);
+    if (!user) {
+      // Если пользователь не авторизован, перенаправляем на регистрацию
+      navigate('/register');
+    } else {
+      // Если авторизован, переходим к деталям поездки
+      navigate(`/ride/${rideId}`);
+    }
   };
 
   return (
@@ -68,7 +75,6 @@ function Home() {
                 <p>Available seats: {ride.seatsCount}</p>
               </div>
               <div className={styles.buttons}>
-                <button className={styles.addButton}>Add Ride</button>
                 <button
                   className={styles.detailsButton}
                   onClick={() => handleViewDetails(ride.id)}

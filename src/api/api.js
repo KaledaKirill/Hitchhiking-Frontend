@@ -32,5 +32,9 @@ export const getRidesByDriverId = (userId) => api.get(`/rides/search/driver/id?d
 export const getRidesByPassengerId = (userId) => api.get(`/rides/search/passenger/id?passengerId=${userId}`);
 export const createRide = (rideData) => api.post('/rides/create', rideData);
 export const getRideById = (rideId) => api.get(`/rides/${rideId}`);
+export const deleteRide = (rideId) => api.delete(`/rides/delete/${rideId}`);
+export const addPassenger = (rideId, userId) => api.post(`/rides/${rideId}/passenger/${userId}`);
+export const removePassenger = (rideId, userId) => api.delete(`/rides/${rideId}/passenger/${userId}`);
+export const updateRide = (rideId, rideData) => api.put(`/rides/update/${rideId}`, rideData);
 
 export default api;

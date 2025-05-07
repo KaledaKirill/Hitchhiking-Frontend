@@ -32,8 +32,8 @@ function CreateRide() {
     setLoading(true);
     setError(null);
 
-    if (!user || !user.id) {
-      setError('User not authenticated or ID is missing.');
+    if (!user) {
+      setError('User not authenticated.');
       setLoading(false);
       return;
     }
@@ -41,7 +41,7 @@ function CreateRide() {
     try {
       const rideData = {
         ...formData,
-        driverId: user.id, // Добавляем driverId из user
+        departureTime: new Date(formData.departureTime).toISOString(),
       };
       await createRide(rideData);
       navigate('/profile');

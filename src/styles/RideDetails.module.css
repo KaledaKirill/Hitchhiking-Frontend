@@ -200,32 +200,3 @@
     font-size: 1rem;
     margin: 2rem 0;
   }
-  
-  /* Адаптивность: переключение на одну колонку для мобильных устройств */
-  @media (max-width: 768px) {
-    .contentWrapper {
-      grid-template-columns: 1fr;
-    }
-  
-    .rideDetails {
-      padding: 1.5rem;
-      max-width: 100%;
-    }
-  
-    .actionButtons {
-      position: static;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: flex-start;
-      margin-top: 1rem;
-    }
-  
-    .editButton,
-    .deleteButton,
-    .joinButton,
-    .leaveButton {
-      width: auto;
-      margin-bottom: 0.5rem;
-    }
-  }

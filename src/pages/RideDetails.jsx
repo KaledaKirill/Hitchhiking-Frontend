@@ -32,11 +32,11 @@ function RideDetails() {
   }, [rideId]);
 
   const formatDateTime = (dateTime) => {
-    return new Date(dateTime).toLocaleString('en-US', {
-      month: 'numeric',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+    return new Date(dateTime).toLocaleString('ru-RU', {
+      day: 'numeric', 
+      month: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit', 
     });
   };
 
@@ -146,8 +146,6 @@ function RideDetails() {
                   <button className={styles.joinButton} onClick={handleJoin}>
                     Join Ride
                   </button>
-                ) : !isDriver && !isPassenger && !canJoin ? (
-                  <p className={styles.noSeatsMessage}>No available seats.</p>
                 ) : null}
               </div>
             )}
@@ -158,9 +156,7 @@ function RideDetails() {
           <h3 className={styles.sectionTitle}>Driver</h3>
           <div className={styles.driverCard}>
             <h4 className={styles.cardTitle}>
-              <Link to={`/profile/${ride.driver.id}`} className={styles.link}>
                 {ride.driver.name || 'Unknown Driver'}
-              </Link>
             </h4>
             <p className={styles.cardInfo}>
               <span className={styles.infoLabel}>Email:</span> {ride.driver.email || 'Not provided'}
@@ -176,9 +172,7 @@ function RideDetails() {
               {ride.passengers.map((passenger) => (
                 <div key={passenger.id} className={styles.passengerCard}>
                   <h4 className={styles.cardTitle}>
-                    <Link to={`/profile/${passenger.id}`} className={styles.link}>
-                      {passenger.name || 'Unknown Passenger'}
-                    </Link>
+                    {passenger.name || 'Unknown Passenger'}
                   </h4>
                   <p className={styles.cardInfo}>
                     <span className={styles.infoLabel}>Email:</span> {passenger.email || 'Not provided'}

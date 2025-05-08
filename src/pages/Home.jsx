@@ -1,34 +1,62 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext'; // Импортируем AuthContext
+import { AuthContext } from '../context/AuthContext'; 
 import { getAllRides } from '../api/api';
 import styles from '../styles/Home.module.css';
 import arrowIcon from '../assets/arrow.png';
 import carIcon from '../assets/car.png';
+import NoRidesCard from '../components/NoRidesCard.jsx';
 
 function Home() {
-  const { user } = useContext(AuthContext); // Получаем информацию о пользователе
+  const { user } = useContext(AuthContext); 
   const [rides, setRides] = useState([]);
+  const [filters, setFilters] = useState({
+    departure: '',
+    destination: '',
+    date: '',
+  });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchRides = async () => {
-      try {
-        const response = await getAllRides();
-        setRides(response.data);
-      } catch (error) {
-        console.error('Error loading rides:', error);
-      }
-    };
-    fetchRides();
+    fetchAllRides();
   }, []);
 
+  const fetchAllRides = async () => {
+    setLoading(true);
+    try {
+      const response = await getAllRides();
+      setRides(response.data);
+    } catch (error) {
+      console.error('Error loading rides:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchRides = async () => {
+    setLoading(true);
+    try {
+      const trimmedFilters = {
+        departure: filters.departure.trim(),
+        destination: filters.destination.trim(),
+        date: filters.date.trim(),
+      };
+      const response = await getAllRides(trimmedFilters);
+      setRides(response.data);
+    } catch (error) {
+      console.error('Error loading rides:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const formatDateTime = (dateTime) => {
-    return new Date(dateTime).toLocaleString('en-US', {
-      month: 'numeric',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+    return new Date(dateTime).toLocaleString('ru-RU', {
+      day: 'numeric', 
+      month: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit', 
     });
   };
 
@@ -42,19 +70,71 @@ function Home() {
 
   const handleViewDetails = (rideId) => {
     if (!user) {
-      // Если пользователь не авторизован, перенаправляем на регистрацию
-      navigate('/register');
+      navigate('/login');
     } else {
-      // Если авторизован, переходим к деталям поездки
       navigate(`/ride/${rideId}`);
     }
   };
 
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value.trim(),
+    }));
+  };
+
+  const applyFilters = () => {
+    fetchRides();
+  };
+
+  const resetFilters = () => {
+    setFilters({
+      departure: '',
+      destination: '',
+      date: '',
+    });
+    fetchAllRides();
+  };
+
+  const filteredRides = rides.length > 0 ? rides.filter((ride) => ride.seatsCount > 0) : [];
+
   return (
     <div className={styles.container}>
+      <div className={styles.filters}>
+        <input
+          type="text"
+          name="departure"
+          placeholder="Filter by departure"
+          value={filters.departure}
+          onChange={handleFilterChange}
+          className={styles.filterInput}
+        />
+        <input
+          type="text"
+          name="destination"
+          placeholder="Filter by destination"
+          value={filters.destination}
+          onChange={handleFilterChange}
+          className={styles.filterInput}
+        />
+        <input
+          type="date"
+          name="date"
+          value={filters.date}
+          onChange={handleFilterChange}
+          className={styles.filterInput}
+        />
+        <button onClick={applyFilters} className={styles.filterButton} disabled={loading}>
+          {loading ? 'Loading...' : 'Apply Filters'}
+        </button>
+        <button onClick={resetFilters} className={styles.filterButton} disabled={loading}>
+          Reset Filters
+        </button>
+      </div>
       <div className={styles.ridesGrid}>
-        {rides.length > 0 ? (
-          rides.map((ride) => (
+        {filteredRides.length > 0 ? (
+          filteredRides.map((ride) => (
             <div key={ride.id} className={styles.rideCard}>
               <div>
                 <h3 onClick={handleNavigateHome} style={{ cursor: 'pointer' }}>
@@ -85,7 +165,7 @@ function Home() {
             </div>
           ))
         ) : (
-          <p>No rides found</p>
+          <NoRidesCard />
         )}
       </div>
     </div>

@@ -1,23 +1,35 @@
-// src/components/EditRideModal.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/EditRideModal.module.css';
 
 function EditRideModal({ isOpen, onClose, ride, onUpdateSuccess, updateRide }) {
   const [formData, setFormData] = useState({
-    car: ride.car || '',
-    seatsCount: ride.seatsCount || 1,
-    departure: ride.departure || '',
-    destination: ride.destination || '',
-    departureTime: ride.departureTime ? new Date(ride.departureTime).toISOString().slice(0, 16) : '',
+    car: ride?.car || '',
+    seatsCount: ride?.seatsCount || 1,
+    departure: ride?.departure || '',
+    destination: ride?.destination || '',
+    departureTime: ride?.departureTime || '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (ride?.departureTime) {
+      const date = new Date(ride.departureTime);
+      const localTime = date.toLocaleString('sv-SE', {
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      }).slice(0, 19).replace(' ', 'T');
+      setFormData((prev) => ({
+        ...prev,
+        departureTime: localTime,
+      }));
+    }
+  }, [ride]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'seatsCount' ? parseInt(value) : value,
+      [name]: name === 'seatsCount' ? parseInt(value, 10) || 1 : value,
     }));
   };
 
@@ -27,11 +39,16 @@ function EditRideModal({ isOpen, onClose, ride, onUpdateSuccess, updateRide }) {
     setError(null);
 
     try {
+      const date = new Date(formData.departureTime);
+      date.setHours(date.getHours() + 3);
+      const adjustedTime = date.toISOString().slice(0, 19);
       const rideData = {
         ...formData,
-        departureTime: new Date(formData.departureTime).toISOString(),
+        departureTime: adjustedTime,
+        id: ride?.id || '',
       };
-      await updateRide(ride.id, rideData); // Используем пропс updateRide
+      if (!rideData.id) throw new Error('Ride ID is missing');
+      await updateRide(rideData.id, rideData);
       onUpdateSuccess();
       onClose();
     } catch (err) {
@@ -103,7 +120,7 @@ function EditRideModal({ isOpen, onClose, ride, onUpdateSuccess, updateRide }) {
               type="datetime-local"
               id="departureTime"
               name="departureTime"
-              value={formData.departureTime}
+              value={formData.departureTime || ''}
               onChange={handleChange}
               required
             />

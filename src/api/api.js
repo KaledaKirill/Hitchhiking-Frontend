@@ -26,6 +26,7 @@ api.interceptors.response.use(
 export const registerUser = (userData) => api.post('/auth/register', userData);
 export const loginUser = (credentials) => api.post('/auth/login', credentials);
 export const getCurrentUser = () => api.get('/users/me');
+export const updateUser = (id, userData) => api.put(`/users/update/${id}`, userData);
 
 export const getAllRides = (filters = {}) => api.get('/rides', { params: filters });
 export const getRidesByDriverId = (userId) => api.get(`/rides/search/driver/id?driverId=${userId}`);

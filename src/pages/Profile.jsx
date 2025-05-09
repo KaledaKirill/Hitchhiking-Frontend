@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { getCurrentUser, getRidesByDriverId, getRidesByPassengerId, removePassenger, deleteRide, updateRide, getRideById } from '../api/api';
+import { getCurrentUser, getRidesByDriverId, getRidesByPassengerId, removePassenger, deleteRide, updateRide, getRideById, updateUser } from '../api/api';
 import Modal from '../components/Modal';
 import EditRideModal from '../components/EditRideModal';
+import EditUserModal from '../components/EditUserModal';
 import styles from '../styles/Profile.module.css';
 import profileIcon from '../assets/profile.png';
+import editIcon from '../assets/edit.png';
 
 function Profile() {
   const { user, token } = useContext(AuthContext);
@@ -19,6 +21,7 @@ function Profile() {
   const [modalAction, setModalAction] = useState('');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedRide, setSelectedRide] = useState(null);
+  const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -113,7 +116,7 @@ function Profile() {
 
     try {
       setLoading(true);
-      const rideResponse = await getRideById(ride.id); 
+      const rideResponse = await getRideById(ride.id);
       setSelectedRide(rideResponse.data);
       setIsEditModalOpen(true);
     } catch (err) {
@@ -139,6 +142,19 @@ function Profile() {
     }
   };
 
+  const handleUpdateUserSuccess = async () => {
+    try {
+      setLoading(true);
+      const userResponse = await getCurrentUser();
+      setUserData(userResponse.data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to refresh user data after update.', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleConfirmAction = () => {
     if (modalAction === 'leave') {
       handleLeaveRide();
@@ -149,11 +165,15 @@ function Profile() {
 
   const formatDateTime = (dateTime) => {
     return new Date(dateTime).toLocaleString('ru-RU', {
-      day: 'numeric', 
-      month: 'numeric', 
-      hour: '2-digit', 
-      minute: '2-digit', 
+      day: 'numeric',
+      month: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
     });
+  };
+
+  const handleEditUserClick = () => {
+    setIsEditUserModalOpen(true);
   };
 
   if (!user) {
@@ -167,11 +187,14 @@ function Profile() {
     <div className={styles.container}>
       <div className={styles.profileHeader}>
         <img src={profileIcon} alt="Profile" className={styles.profileIcon} />
-        <div>
+        <div className={styles.profileInfo}>
           <h2>{userData?.name || 'User Name'}</h2>
           <p>Email: {userData?.email}</p>
           <p>Phone: {userData?.phone}</p>
         </div>
+        <button className={styles.editProfileButton} onClick={handleEditUserClick}>
+          <img src={editIcon} alt="Edit Profile" className={styles.editIcon} />
+        </button>
       </div>
       <div className={styles.tripsContainer}>
         <div className={styles.tripsSection}>
@@ -265,6 +288,14 @@ function Profile() {
         ride={selectedRide || { id: '', car: '', seatsCount: 1, departure: '', destination: '', departureTime: '' }}
         onUpdateSuccess={handleEditSuccess}
         updateRide={updateRide}
+      />
+
+      <EditUserModal
+        isOpen={isEditUserModalOpen}
+        onClose={() => setIsEditUserModalOpen(false)}
+        userData={userData}
+        onUpdateSuccess={handleUpdateUserSuccess}
+        updateUser={updateUser}
       />
     </div>
   );

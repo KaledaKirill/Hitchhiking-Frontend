@@ -25,26 +25,53 @@
   object-fit: cover;
 }
 
-.profileHeader h2 {
+.profileInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profileInfo h2 {
   margin: 0;
   font-size: 1.5rem;
   color: #030303;
 }
 
-.profileHeader p {
-  margin: 0.25rem 0 0;
+.profileInfo p {
+  margin: 0.1rem 0 0;
   font-size: 0.9rem;
   color: #666;
 }
 
-/* Контейнер для секций поездок */
+.editProfileButton {
+  background-color: transparent; 
+  border: none;
+  padding: 0.4rem; 
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: auto; 
+  border-radius: 50%;
+}
+
+.editProfileButton:hover {
+  background-color: #e0f2f1;
+  border-radius: 50%;
+}
+
+.editIcon {
+  width: 35px;
+  height: 35px;
+  display: block;
+}
+
 .tripsContainer {
   display: flex;
   gap: 2rem;
   justify-content: space-between;
 }
 
-/* Секция поездок (водитель или пассажир) */
 .tripsSection {
   flex: 1;
   background-color: #e0f2f1;

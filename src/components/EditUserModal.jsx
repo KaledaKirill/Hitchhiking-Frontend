@@ -4,7 +4,6 @@ import styles from '../styles/EditUserModal.module.css';
 function EditUserModal({ isOpen, onClose, userData, onUpdateSuccess, updateUser }) {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
   });
   const [loading, setLoading] = useState(false);
@@ -14,7 +13,6 @@ function EditUserModal({ isOpen, onClose, userData, onUpdateSuccess, updateUser 
     if (userData) {
       setFormData({
         name: userData.name || '',
-        email: userData.email || '',
         phone: userData.phone || '',
       });
     }
@@ -63,18 +61,6 @@ function EditUserModal({ isOpen, onClose, userData, onUpdateSuccess, updateUser 
               onChange={handleChange}
               required
               placeholder="Enter your name"
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="Enter your email"
             />
           </div>
           <div className={styles.formGroup}>

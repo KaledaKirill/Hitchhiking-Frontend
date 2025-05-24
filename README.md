@@ -1,12 +1,24 @@
-# React + Vite
+# Hitchhiking Service
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Описание проекта
 
-Currently, two official plugins are available:
+**Hitchhiking Service** — это веб-приложение, которое позволяет пользователям организовывать совместные поездки. Пользователи могут выступать в роли водителей, создавая поездки, или в роли пассажиров, присоединяясь к существующим поездкам. Приложение предоставляет удобный функционал для управления профилем, просмотра поездок, редактирования данных пользователя и управления поездками (создание, изменение, удаление).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Основные возможности
+- **Аутентификация и авторизация** пользователей.
+- **Просмотр и редактирование профиля** пользователя (имя, телефон).
+- **Создание, изменение и удаление поездок** для водителей.
+- **Присоединение к поездкам и выход из них** для пассажиров.
+- **Просмотр деталей поездок**.
 
-## Expanding the ESLint configuration
+## Технологии
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React**: Библиотека для построения пользовательского интерфейса.
+- **React Router**: Для навигации между страницами.
+- **CSS Modules**: Для стилизации компонентов.
+- **Axios**: Для выполнения HTTP-запросов к бэкенду.
+
+## Требования
+
+- **Node.js** (версия 16.x или выше) и **npm** для фронтенда.
+- **Java** (версия 17) и **Maven** для бэкенда.
